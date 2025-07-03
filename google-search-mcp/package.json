@@ -1,0 +1,32 @@
+{
+  "name": "google_search_mcp",
+  "version": "0.1.0",
+  "description": "MCP server for Google Custom Search API integration",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "google_search": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "build:unix": "tsc && chmod 755 dist/index.js",
+    "prepare": "npm run build",
+    "watch": "tsc --watch",
+    "start": "node dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "main": "index.js",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.4.0",
+    "dotenv": "^16.4.5",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "typescript": "^5.4.2"
+  }
+}

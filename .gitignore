@@ -14,3 +14,6 @@ venv.bak/
 
 # Reports
 reports/
+
+node_modules/
+google-search-mcp/node_modules/
