@@ -29,6 +29,7 @@ class CompanyInvestmentRisk(BaseModel):
     market_risks: List[str]
     company_specific_risks: List[str]
     regulatory_risks: List[str]
+    current_risks: List[str]
     overall_risk_level: str  # "Low", "Medium", "High"
 
 # Wrapper models for multiple companies
@@ -54,7 +55,7 @@ stock_analyst_agent = Agent(name="Stock Analyst",
 
 
 market_research = Task(
-    "Analyze each given company's market position, key performance metrics, and competitive landscape using Google search to find the latest financial data, market share information, and competitive analysis." + "Companies: " + str(company_names),  
+    "Analyze each given company's market position, key performance metrics, and competitive landscape using Google search. Analyze recent news and reports to provide the recent performance of the company." + "Companies: " + str(company_names),  
     context=[company_names],
     tools=[GoogleSearchMCP],
     response_format=MarketPosition,
@@ -62,7 +63,13 @@ market_research = Task(
 )
 
 financial_health = Task(
-    "Evaluate each company's financial health by searching for key financial ratios, analyst recommendations, earnings reports, and recent news to identify primary growth catalysts." + "Companies: " + str(company_names),
+    """Evaluate each company's financial health by searching for the followings:
+    1. key financial ratios, 
+    2. analyst recommendations by looking at ratings and price targets from recent analysis, 
+    3. earnings reports by looking at the latest data and analyst reports, 
+    4. growth catalysts by looking at the latest news and reports.
+    Include numeric data from the latest news and reports.
+    Companies: """ + str(company_names),
     context=[company_names],
     tools=[GoogleSearchMCP],
     response_format=FinancialHealth,
@@ -70,7 +77,13 @@ financial_health = Task(
 )
 
 risk_assessment = Task(
-    "Identify and summarize all significant investment risks by searching for market analysis, company-specific risks, regulatory issues, and macroeconomic factors that could impact these companies." + "Companies: " + str(company_names),
+    """Identify and summarize all significant investment risks by searching for the followings:
+    1. market risks like industry trends, macroeconomic factors, market volatility, competitive threats
+    2. company-specific risks mainly internal risks like management issues, operational challenges, financial weaknesses
+    3. regulatory issues like government regulations, compliance issues, legal challenges, antitrust concerns
+    4. current risks from recent news and reports.
+    Include numeric data from the latest news and reports.
+    Companies: """ + str(company_names),
     context=[company_names],
     tools=[GoogleSearchMCP],
     response_format=InvestmentRisk,

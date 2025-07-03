@@ -15,14 +15,17 @@ stock_analyst_agent.print_do(risk_assessment)
 with open("stock_analysis_structured_report.md", "w") as f:
     f.write("# Stock Analysis Structured Report\n\n")
     f.write("## Market Research\n")
-    f.write(str(market_research.response) if hasattr(market_research, 'response') and market_research.response else "No response available")
-    f.write("\n\n")
+    f.write("```json\n")
+    f.write(json.dumps(market_research.response.model_dump(), indent=2) if hasattr(market_research, 'response') and market_research.response else "No response available")
+    f.write("\n```\n\n")
     f.write("## Financial Health\n")
-    f.write(str(financial_health.response) if hasattr(financial_health, 'response') and financial_health.response else "No response available")
-    f.write("\n\n")
+    f.write("```json\n")
+    f.write(json.dumps(financial_health.response.model_dump(), indent=2) if hasattr(financial_health, 'response') and financial_health.response else "No response available")
+    f.write("\n```\n\n")
     f.write("## Risk Assessment\n")
-    f.write(str(risk_assessment.response) if hasattr(risk_assessment, 'response') and risk_assessment.response else "No response available")
-    f.write("\n")
+    f.write("```json\n")
+    f.write(json.dumps(risk_assessment.response.model_dump(), indent=2) if hasattr(risk_assessment, 'response') and risk_assessment.response else "No response available")
+    f.write("\n```\n")
 
 
 
