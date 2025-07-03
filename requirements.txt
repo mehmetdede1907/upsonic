@@ -1,3 +1,0 @@
-upsonic
-python-dotenv
-pydantic
