@@ -64,10 +64,10 @@ market_research = Task(
 
 financial_health = Task(
     """Evaluate each company's financial health by searching for the followings:
-    1. key financial ratios, 
-    2. analyst recommendations by looking at ratings and price targets from recent analysis, 
-    3. earnings reports by looking at the latest data and analyst reports, 
-    4. growth catalysts by looking at the latest news and reports.
+    1. Key financial ratios, 
+    2. Analyst recommendations by looking at ratings and price targets from recent analysis, 
+    3. Earnings reports by looking at the latest data and analyst reports, 
+    4. Growth catalysts by looking at the latest news and reports.
     Include numeric data from the latest news and reports.
     Companies: """ + str(company_names),
     context=[company_names],
@@ -78,10 +78,10 @@ financial_health = Task(
 
 risk_assessment = Task(
     """Identify and summarize all significant investment risks by searching for the followings:
-    1. market risks like industry trends, macroeconomic factors, market volatility, competitive threats
-    2. company-specific risks mainly internal risks like management issues, operational challenges, financial weaknesses
-    3. regulatory issues like government regulations, compliance issues, legal challenges, antitrust concerns
-    4. current risks from recent news and reports.
+    1. Market risks like industry trends, macroeconomic factors, market volatility, competitive threats
+    2. Company-specific risks mainly internal risks like management issues, operational challenges, financial weaknesses
+    3. Regulatory issues like government regulations, compliance issues, legal challenges, antitrust concerns
+    4. Current risks from recent news and reports.
     Include numeric data from the latest news and reports.
     Companies: """ + str(company_names),
     context=[company_names],
