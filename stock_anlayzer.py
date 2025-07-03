@@ -44,7 +44,7 @@ class InvestmentRisk(BaseModel):
 stock_analysis_canvas = Canvas("Stock Analysis Report")
 
 stock_analyst_agent = Agent(name="Stock Analyst", 
-              system_prompt="You are given a list of companies and you need to analyze the companies based on recent news and reports as a stock analyst. The alaysis should include numeric datas from the latest news and reports. Edit canvas after each task is completed.",
+              system_prompt="You are given a list of companies and you need to analyze the companies based on recent news and reports as a stock analyst. The alaysis should include numeric datas from the latest news and reports. Put the exact tasks results in the canvas after each task is completed without changing task output.",
               model="openai/gpt-4o",
               #Focused on the research objective of Goldman Sachs
               company_url="https://www.goldmansachs.com/",
@@ -58,7 +58,7 @@ market_research = Task(
     context=[company_names],
     tools=[GoogleSearchMCP],
     response_format=MarketPosition,
-    agent=stock_analyst_agent
+    agent=stock_analyst_agent,
 )
 
 financial_health = Task(
@@ -66,7 +66,7 @@ financial_health = Task(
     context=[company_names],
     tools=[GoogleSearchMCP],
     response_format=FinancialHealth,
-    agent=stock_analyst_agent
+    agent=stock_analyst_agent,
 )
 
 risk_assessment = Task(
@@ -76,26 +76,3 @@ risk_assessment = Task(
     response_format=InvestmentRisk,
     agent=stock_analyst_agent
 )
-
-
-
-
-#Save the response to a file as text
-
-stock_analyst_agent.print_do(market_research)
-market_research_response = market_research.response
-
-with open("market_research_response.txt", "w") as f:
-    f.write(str(market_research_response))
-
-stock_analyst_agent.print_do(financial_health)
-financial_health_response = financial_health.response
-
-with open("financial_health_response.txt", "w") as f:
-    f.write(str(financial_health_response))
-
-stock_analyst_agent.print_do(risk_assessment)
-risk_assessment_response = risk_assessment.response
-
-with open("risk_assessment_response.txt", "w") as f:
-    f.write(str(risk_assessment_response))
