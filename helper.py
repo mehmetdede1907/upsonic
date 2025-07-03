@@ -73,3 +73,31 @@ def save_research_analysis_report(investment_analysis, risk_evaluation, filename
         f.write("\n```\n")
     
     print(f"Research analysis report saved to {filename}") 
+
+def save_investment_lead_analysis_report(develop_portfolio_strategy, articulate_investment_rationale, prepare_final_recommendation, filename="investment_lead_analysis_report.md"):
+    """
+    Save investment lead analysis results to a structured markdown file.
+    
+    Args:
+        develop_portfolio_strategy: Portfolio strategy task result
+        articulate_investment_rationale: Investment rationale task result
+        prepare_final_recommendation: Final recommendation task result
+        filename: Output filename (default: investment_lead_analysis_report.md)
+    """
+    with open(filename, "w") as f:
+        f.write("# Investment Lead Analysis Report\n\n")
+        
+        f.write("## Portfolio Strategy\n")
+        f.write("```json\n")
+        f.write(json.dumps(develop_portfolio_strategy.response.model_dump(), indent=2) if hasattr(develop_portfolio_strategy, 'response') and develop_portfolio_strategy.response else "No response available")
+        f.write("\n```\n\n")
+        
+        f.write("## Investment Rationale\n")
+        f.write("```json\n")
+        f.write(json.dumps(articulate_investment_rationale.response.model_dump(), indent=2) if hasattr(articulate_investment_rationale, 'response') and articulate_investment_rationale.response else "No response available")
+        f.write("\n```\n\n")
+        
+        f.write("## Final Recommendation\n")
+        f.write("```json\n")
+        f.write(json.dumps(prepare_final_recommendation.response.model_dump(), indent=2) if hasattr(prepare_final_recommendation, 'response') and prepare_final_recommendation.response else "No response available")
+        f.write("\n```\n")

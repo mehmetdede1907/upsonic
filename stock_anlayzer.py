@@ -7,7 +7,7 @@ from google_search_mcp import GoogleSearchMCP
 
 load_dotenv()
 
-company_names = ["Oracle","Upsonic","Google","Apple"]
+company_names = ["AAPL", "GOOG", "ORCL"]
 
 # Pydantic models for individual company data
 class CompanyMarketPosition(BaseModel):

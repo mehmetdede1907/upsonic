@@ -54,7 +54,7 @@ investment_analysis = Task(
     3. Market Positioning: Assess how well the company is positioned in their market segment, their brand strength, customer base, and strategic initiatives.
     Additionally, provide a 
     **Relative Valuations** section that compares all companies against each other in terms of investment attractiveness and market positioning.
-    Finally, provide """ + stock_analysis_report,
+    Finally, provide """ + get_stock_analysis_report(),
     context=[market_research, financial_health],
     agent=research_analyst_agent,
     response_format=InvestmentAnalysis,
@@ -64,7 +64,7 @@ risk_evaluation = Task(
     """Based on the provided risk assessment data, conduct a risk evaluation for each company by analyzing:
     1. Extract & Summarize Key Risks: From the risk assessment data for each company, extract the primary market, company-specific, and regulatory risks. Synthesize these points into a brief profile of the main threats.
     2. Analyze Impact on Growth: Evaluate how this combined risk profile impacts each company's growth sustainability. Assess their ability to manage these threats based on the market positioning and advantages provided in the investment analysis. 
-    Use the following risk assessment data: """ + stock_analysis_report,
+    Use the following risk assessment data: """ + get_stock_analysis_report(),
     context=[risk_assessment, investment_analysis],
     agent=research_analyst_agent,
     response_format=RiskEvaluation,

@@ -1,17 +1,32 @@
-from upsonic import Task, Agent
+from upsonic import Task, Agent, Canvas, Team
+from stock_anlayzer import market_research, financial_health, risk_assessment
+from research_analyzer import investment_analysis, risk_evaluation, research_analyst_agent
+from investment_lead import develop_portfolio_strategy, articulate_investment_rationale, prepare_final_recommendation, investment_lead_agent
+from helper import save_stock_analysis_report, save_research_analysis_report, save_investment_lead_analysis_report
+from stock_anlayzer import stock_analyst_agent
 
-# String as Context
-city = "New York"
+stock_analyst_agent.print_do(market_research)
 
+stock_analyst_agent.print_do(financial_health)
 
-# Creating Task
-task = Task(
-  "Find eating places in the city",
-  context=[city] # Adding city string as context
-)
+stock_analyst_agent.print_do(risk_assessment)
 
-# Creating Agent
-agent = Agent(name="City Guide")
+#Save the response to a file as proper format
+save_stock_analysis_report(market_research, financial_health, risk_assessment)
 
-# Running the task
-agent.print_do(task)
+research_analyst_agent.print_do(investment_analysis)
+
+research_analyst_agent.print_do(risk_evaluation)
+
+# Save the research analysis responses to a file as proper format
+save_research_analysis_report(investment_analysis, risk_evaluation)
+
+investment_lead_agent.print_do(develop_portfolio_strategy)
+
+investment_lead_agent.print_do(articulate_investment_rationale)
+
+investment_lead_agent.print_do(prepare_final_recommendation)
+
+# Save the investment lead analysis responses to a file as proper format
+save_investment_lead_analysis_report(develop_portfolio_strategy, articulate_investment_rationale, prepare_final_recommendation)
+
