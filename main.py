@@ -1,7 +1,7 @@
 from upsonic import Team
-from stock_anlayzer import market_research, financial_health, risk_assessment, stock_analyst_agent, set_company_names
-from research_analyzer import investment_analysis, risk_evaluation, research_analyst_agent
-from investment_lead import develop_portfolio_strategy, articulate_investment_rationale, prepare_final_recommendation, investment_lead_agent
+from agents.stock_anlayzer import market_research, financial_health, risk_assessment, stock_analyst_agent, set_company_names
+from agents.research_analyzer import investment_analysis, risk_evaluation, research_analyst_agent
+from agents.investment_lead import develop_portfolio_strategy, articulate_investment_rationale, prepare_final_recommendation, investment_lead_agent
 
 # Get company names from user input
 user_input = input("Enter the company ticker symbols separated by commas: ")

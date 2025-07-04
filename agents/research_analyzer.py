@@ -1,7 +1,7 @@
 from upsonic import Task, Agent,Canvas
 from pydantic import BaseModel
 from typing import List
-from stock_anlayzer import market_research, financial_health, risk_assessment
+from .stock_anlayzer import market_research, financial_health, risk_assessment
 from helper import get_stock_analysis_report
 from pydantic import BaseModel
 
