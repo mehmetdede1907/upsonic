@@ -40,6 +40,7 @@ A three-tier AI system for stock analysis and investment recommendations using U
    ```
 
 5. **Run analysis:**
+for now run the test code to not exeed 4o token rate limit
    ```bash
    python main.py  # Interactive mode - enter company tickers
    python test.py  # Run with default companies (AAPL, GOOG, ORCL)
@@ -58,7 +59,7 @@ All reports are saved in `results/` folder:
 - `research_analysis_report.md` - Investment potential and risk evaluation
 - `investment_lead_analysis_report.md` - Portfolio strategy and recommendations
 
-## Configuration
+## Configuration For Demo Run with Tes
 
 **Change companies**: Modify `company_names` in `stock_anlayzer.py`
 ```python
