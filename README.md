@@ -61,7 +61,7 @@ All reports are saved in `results/` folder:
 
 ## Configuration For Demo Run with Tes
 
-**Change companies**: Modify `company_names` in `stock_anlayzer.py`
+**Change companies**: Modify `company_names` in `agents/stock_anlayzer.py`
 ```python
 company_names = ["AAPL", "GOOGL", "MSFT"]
 ```
@@ -73,9 +73,11 @@ company_names = ["AAPL", "GOOGL", "MSFT"]
 ```
 ├── main.py                      # Main execution
 ├── test.py                      # Test all components  
-├── stock_anlayzer.py           # Tier 1: Stock analysis
-├── research_analyzer.py        # Tier 2: Research analysis
-├── investment_lead.py          # Tier 3: Investment recommendations
+├── agents/                      # AI Agent modules
+│   ├── __init__.py             # Package initialization
+│   ├── stock_anlayzer.py       # Tier 1: Stock analysis
+│   ├── research_analyzer.py    # Tier 2: Research analysis
+│   └── investment_lead.py      # Tier 3: Investment recommendations
 ├── helper.py                   # File utilities
 ├── results/                    # Generated reports
 └── google-search-mcp/          # Search integration
