@@ -1,42 +1,100 @@
-# Stock Analyzer
+# AI Stock Analysis System
 
-A Python-based stock analysis tool that uses AI to analyze market positions, financial health, and risk assessment for companies.
+A three-tier AI system for stock analysis and investment recommendations using Upsonic framework.
 
-## Features
+## Quick Start
 
-- Market research analysis
-- Financial health evaluation
-- Risk assessment
-- Web search integration for real-time data
-
-## Setup
-
-1. **Install dependencies:**
+1. **Install Python dependencies:**
    ```bash
-   pip install -r requirements.txt
+   pip install upsonic python-dotenv pydantic
    ```
 
-2. **Set up environment variables:**
-   Create a `.env` file with your API keys:
+2. **Set up Google Search MCP:**
+   ```bash
+   cd google-search-mcp
+   npm install
+   npm run build
+   chmod 755 dist/index.js
+   cd ..
    ```
+
+3. **Set up Google Cloud APIs:**
+   - **Enable Custom Search API:**
+     - Go to [Google Cloud Console](https://console.cloud.google.com/)
+     - Navigate to **APIs & Services** → **Library**
+     - Search for **"Custom Search API"** and **Enable** it
+   - **Create API Key:**
+     - Go to **APIs & Services** → **Credentials**
+     - Click **"Create Credentials"** → **"API Key"**
+     - Copy the API key
+   - **Create Search Engine:**
+     - Go to [Programmable Search Engine](https://programmablesearchengine.google.com/)
+     - Create a new search engine
+     - Copy the Search Engine ID
+
+4. **Set up environment variables in `.env`:**
+   ```env
    OPENAI_API_KEY=your_openai_api_key_here
+   GOOGLE_API_KEY=your_google_api_key_here
+   GOOGLE_CSE_ID=your_custom_search_engine_id_here
    ```
 
-3. **Run the analyzer:**
+5. **Run analysis:**
    ```bash
-   python stock_anlayzer.py
+   python main.py  # Interactive mode - enter company tickers
+   python test.py  # Run with default companies (AAPL, GOOG, ORCL)
    ```
+
+## System Overview
+
+**Tier 1 - Stock Analyst**: Market research, financial health, risk assessment
+**Tier 2 - Research Analyst**: Investment analysis, competitive advantages, risk evaluation  
+**Tier 3 - Investment Lead**: Portfolio strategy, investment rationale, final recommendations
+
+## Output
+
+All reports are saved in `results/` folder:
+- `stock_analysis_structured_report.md` - Market and financial analysis
+- `research_analysis_report.md` - Investment potential and risk evaluation
+- `investment_lead_analysis_report.md` - Portfolio strategy and recommendations
 
 ## Configuration
 
-You can modify the `company_names` list in `stock_anlayzer.py` to analyze different companies.
+**Change companies**: Modify `company_names` in `stock_anlayzer.py`
+```python
+company_names = ["AAPL", "GOOGL", "MSFT"]
+```
 
-## Notes
+**Custom analysis**: Adjust prompts in agent `system_prompt` parameters
 
-- The tool includes rate limiting protection to avoid API limits
-- Uses DuckDuckGo search for web data retrieval
-- Requires OpenAI API key for AI analysis
+## Project Structure
+
+```
+├── main.py                      # Main execution
+├── test.py                      # Test all components  
+├── stock_anlayzer.py           # Tier 1: Stock analysis
+├── research_analyzer.py        # Tier 2: Research analysis
+├── investment_lead.py          # Tier 3: Investment recommendations
+├── helper.py                   # File utilities
+├── results/                    # Generated reports
+└── google-search-mcp/          # Search integration
+```
 
 ## Troubleshooting
 
-If you encounter rate limiting errors, wait a few minutes before running again.
+- **API errors**: Check `.env` file and API keys
+- **Rate limits**: Wait between runs
+- **Import errors**: Ensure virtual environment is activated
+
+---
+
+## TODO - Current Bugs Need To Be Fixed
+
+1. **Dynamic Company Configuration**: The stock analysis tasks are static and don't receive company information from main.py. Implement a class hierarchy or solution to make tasks dynamic.
+
+2. **Rate Limiting & Token Optimization**: Currently runs in test mode. Main.py needs rate limiting due to large context lengths. Make it efficient to stay under 128k tokens and avoid API limits.
+
+---
+
+**Note**: For analysis purposes only. Not financial advice.
+
