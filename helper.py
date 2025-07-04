@@ -1,6 +1,6 @@
 import json
 
-def save_stock_analysis_report(market_research, financial_health, risk_assessment, filename="stock_analysis_structured_report.md"):
+def save_stock_analysis_report(market_research, financial_health, risk_assessment, filename="results/stock_analysis_structured_report.md"):
     """
     Save stock analysis results to a structured markdown file.
     
@@ -8,7 +8,7 @@ def save_stock_analysis_report(market_research, financial_health, risk_assessmen
         market_research: Market research task result
         financial_health: Financial health task result
         risk_assessment: Risk assessment task result
-        filename: Output filename (default: stock_analysis_structured_report.md)
+        filename: Output filename (default: results/stock_analysis_structured_report.md)
     """
     with open(filename, "w") as f:
         f.write("# Stock Analysis Structured Report\n\n")
@@ -30,12 +30,12 @@ def save_stock_analysis_report(market_research, financial_health, risk_assessmen
     
     print(f"Stock analysis report saved to {filename}")
 
-def get_stock_analysis_report(filename="stock_analysis_structured_report.md"):
+def get_stock_analysis_report(filename="results/stock_analysis_structured_report.md"):
     """
     Read stock analysis report from file and return as string.
     
     Args:
-        filename: Input filename (default: stock_analysis_structured_report.md)
+        filename: Input filename (default: results/stock_analysis_structured_report.md)
         
     Returns:
         str: Content of the stock analysis report
@@ -50,14 +50,14 @@ def get_stock_analysis_report(filename="stock_analysis_structured_report.md"):
         print(f"Error reading {filename}: {e}")
         return ""
 
-def save_research_analysis_report(investment_analysis, risk_evaluation, filename="research_analysis_report.md"):
+def save_research_analysis_report(investment_analysis, risk_evaluation, filename="results/research_analysis_report.md"):
     """
     Save research analysis results to a structured markdown file.
     
     Args:
         investment_analysis: Investment analysis task result
         risk_evaluation: Risk evaluation task result
-        filename: Output filename (default: research_analysis_report.md)
+        filename: Output filename (default: results/research_analysis_report.md)
     """
     with open(filename, "w") as f:
         f.write("# Research Analysis Report\n\n")
@@ -74,7 +74,7 @@ def save_research_analysis_report(investment_analysis, risk_evaluation, filename
     
     print(f"Research analysis report saved to {filename}") 
 
-def save_investment_lead_analysis_report(develop_portfolio_strategy, articulate_investment_rationale, prepare_final_recommendation, filename="investment_lead_analysis_report.md"):
+def save_investment_lead_analysis_report(develop_portfolio_strategy, articulate_investment_rationale, prepare_final_recommendation, filename="results/investment_lead_analysis_report.md"):
     """
     Save investment lead analysis results to a structured markdown file.
     
@@ -82,7 +82,7 @@ def save_investment_lead_analysis_report(develop_portfolio_strategy, articulate_
         develop_portfolio_strategy: Portfolio strategy task result
         articulate_investment_rationale: Investment rationale task result
         prepare_final_recommendation: Final recommendation task result
-        filename: Output filename (default: investment_lead_analysis_report.md)
+        filename: Output filename (default: results/investment_lead_analysis_report.md)
     """
     with open(filename, "w") as f:
         f.write("# Investment Lead Analysis Report\n\n")
