@@ -89,3 +89,8 @@ risk_assessment = Task(
     response_format=InvestmentRisk,
     agent=stock_analyst_agent
 )
+
+def set_company_names(names):
+    """Set the global company names variable"""
+    global company_names
+    company_names = names

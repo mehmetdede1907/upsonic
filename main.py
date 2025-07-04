@@ -1,10 +1,15 @@
 from upsonic import Task, Agent, Canvas, Team
-from stock_anlayzer import market_research, financial_health, risk_assessment, stock_analyst_agent
+from stock_anlayzer import market_research, financial_health, risk_assessment, stock_analyst_agent, set_company_names
 from helper import save_stock_analysis_report, save_research_analysis_report, save_investment_lead_analysis_report
 from research_analyzer import investment_analysis, risk_evaluation, research_analyst_agent
 from investment_lead import develop_portfolio_strategy, articulate_investment_rationale, prepare_final_recommendation, investment_lead_agent
 
+# Get company names from user input
+user_input = input("Enter the company ticker symbols separated by commas: ")
+company_names = [name.strip().upper() for name in user_input.split(",") if name.strip()]
 
+# Set the global company names variable
+set_company_names(company_names)
 
 # Create Canvas for Stock Analysis
 team = Team(
@@ -13,31 +18,6 @@ team = Team(
 )
 team.complete()
 
-
-
-# stock_analyst_agent.print_do(market_research)
-
-# stock_analyst_agent.print_do(financial_health)
-
-# stock_analyst_agent.print_do(risk_assessment)
-
-# #Save the response to a file as proper format
-# save_stock_analysis_report(market_research, financial_health, risk_assessment)
-
-# research_analyst_agent.print_do(investment_analysis)
-
-# research_analyst_agent.print_do(risk_evaluation)
-
-# # Save the research analysis responses to a file as proper format
-# save_research_analysis_report(investment_analysis, risk_evaluation)
-
-# investment_lead_agent.print_do(develop_portfolio_strategy)
-
-# investment_lead_agent.print_do(articulate_investment_rationale)
-
-# investment_lead_agent.print_do(prepare_final_recommendation)
-
-# save_investment_lead_analysis_report(develop_portfolio_strategy, articulate_investment_rationale, prepare_final_recommendation)
 
 
 
