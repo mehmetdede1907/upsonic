@@ -17,3 +17,7 @@ reports/
 
 node_modules/
 google-search-mcp/node_modules/
+
+#ignore all md files and txt files
+*.md
+*.txt
