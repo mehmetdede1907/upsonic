@@ -3,9 +3,16 @@ from upsonic.tools import Search
 from dotenv import load_dotenv
 from pydantic import BaseModel
 from typing import List, Optional
-from google_search_mcp import GoogleSearchMCP
-
+import os
 load_dotenv()
+
+class GoogleSearchMCP:
+    command = "node"
+    args = [os.path.join(os.getcwd(), "google-search-mcp", "dist", "index.js")]
+    env = {
+        "GOOGLE_API_KEY": os.getenv("GOOGLE_API_KEY", ""),
+        "GOOGLE_CSE_ID": os.getenv("GOOGLE_CSE_ID", "")
+    }
 
 company_names = ["AAPL", "GOOG", "ORCL"]
 
