@@ -3,7 +3,6 @@ from upsonic.tools import Search
 from dotenv import load_dotenv
 from pydantic import BaseModel
 from typing import List, Optional
-from google_search_mcp import GoogleSearchMCP
 from research_analyzer import investment_analysis, risk_evaluation
 
 
