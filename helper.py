@@ -1,4 +1,5 @@
 import json
+import os
 
 def save_stock_analysis_report(market_research, financial_health, risk_assessment, filename="results/stock_analysis_structured_report.md"):
     """
@@ -10,6 +11,9 @@ def save_stock_analysis_report(market_research, financial_health, risk_assessmen
         risk_assessment: Risk assessment task result
         filename: Output filename (default: results/stock_analysis_structured_report.md)
     """
+    # Create directory if it doesn't exist
+    os.makedirs(os.path.dirname(filename), exist_ok=True)
+    
     with open(filename, "w") as f:
         f.write("# Stock Analysis Structured Report\n\n")
         
@@ -59,6 +63,9 @@ def save_research_analysis_report(investment_analysis, risk_evaluation, filename
         risk_evaluation: Risk evaluation task result
         filename: Output filename (default: results/research_analysis_report.md)
     """
+    # Create directory if it doesn't exist
+    os.makedirs(os.path.dirname(filename), exist_ok=True)
+    
     with open(filename, "w") as f:
         f.write("# Research Analysis Report\n\n")
         
@@ -84,6 +91,9 @@ def save_investment_lead_analysis_report(develop_portfolio_strategy, articulate_
         prepare_final_recommendation: Final recommendation task result
         filename: Output filename (default: results/investment_lead_analysis_report.md)
     """
+    # Create directory if it doesn't exist
+    os.makedirs(os.path.dirname(filename), exist_ok=True)
+    
     with open(filename, "w") as f:
         f.write("# Investment Lead Analysis Report\n\n")
         

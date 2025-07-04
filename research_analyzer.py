@@ -1,7 +1,6 @@
 from upsonic import Task, Agent,Canvas
-from dotenv import load_dotenv
-from pydantic import BaseModel, Field
-from typing import List, Optional, Literal
+from pydantic import BaseModel
+from typing import List
 from stock_anlayzer import market_research, financial_health, risk_assessment
 from helper import get_stock_analysis_report
 from pydantic import BaseModel

@@ -1,5 +1,4 @@
 from upsonic import Task, Agent,Canvas
-from upsonic.tools import Search
 from dotenv import load_dotenv
 from pydantic import BaseModel
 from typing import List, Optional

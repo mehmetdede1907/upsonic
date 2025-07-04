@@ -1,4 +1,4 @@
-from upsonic import Task, Agent, Canvas, Team
+from upsonic import Team
 from stock_anlayzer import market_research, financial_health, risk_assessment
 from research_analyzer import investment_analysis, risk_evaluation, research_analyst_agent
 from investment_lead import develop_portfolio_strategy, articulate_investment_rationale, prepare_final_recommendation, investment_lead_agent
