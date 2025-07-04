@@ -91,11 +91,11 @@ company_names = ["AAPL", "GOOGL", "MSFT"]
 
 ---
 
-## TODO - Current Bugs Need To Be Fixed
+## TODO - Current Fixed
 
-1. **Dynamic Company Configuration**: The stock analysis tasks are static and don't receive company information from main.py. Implement a class hierarchy or solution to make tasks dynamic.
+1. **Dynamic Configuration**: The stock analysis tasks are static and don't receive company information from main.py. Implement a class hierarchy or solution to make tasks dynamic.
 
-2. **Rate Limiting & Token Optimization**: Currently runs in test mode. Main.py needs rate limiting due to large context lengths. Make it efficient to stay under 128k tokens and avoid API limits.
+2. **Rate Limiting & Token Optimization**: Currently runs in test mode. Main.py needs rate limiting due to large context lengths. Make the agent structure efficient to stay under 128k tokens and avoid API limits, and run the agents in a team rather than separately in a test file. 
 
 ---
 
