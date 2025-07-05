@@ -4,12 +4,35 @@ A three-tier AI system for stock analysis and investment recommendations using U
 
 ## Quick Start
 
-1. **Install Python dependencies:**
+**Prerequisites:**
+- Upsonic requires Python >=3.10. Here's how to check your version:
+  ```bash
+  python3 --version
+  ```
+- If you need to update Python, visit [python.org/downloads](https://python.org/downloads)
+
+1. **Create and activate virtual environment:**
+   ```bash
+   # Create virtual environment
+   python -m venv venv
+   
+   # Activate virtual environment
+   # On macOS/Linux:
+   source venv/bin/activate
+   # On Windows:
+   # venv\Scripts\activate
+   ```
+
+2. **Install Python dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+   or
    ```bash
    pip install upsonic python-dotenv pydantic
    ```
 
-2. **Set up Google Search MCP:**
+3. **Set up Google Search MCP:**
    ```bash
    cd google-search-mcp
    npm install
@@ -18,7 +41,7 @@ A three-tier AI system for stock analysis and investment recommendations using U
    cd ..
    ```
 
-3. **Set up Google Cloud APIs:**
+4. **Set up Google Cloud APIs:**
    - **Enable Custom Search API:**
      - Go to [Google Cloud Console](https://console.cloud.google.com/)
      - Navigate to **APIs & Services** → **Library**
@@ -32,14 +55,14 @@ A three-tier AI system for stock analysis and investment recommendations using U
      - Create a new search engine
      - Copy the Search Engine ID
 
-4. **Set up environment variables in `.env`:**
+5. **Set up environment variables in `.env`:**
    ```env
    OPENAI_API_KEY=your_openai_api_key_here
    GOOGLE_API_KEY=your_google_api_key_here
    GOOGLE_CSE_ID=your_custom_search_engine_id_here
    ```
 
-5. **Run analysis:**
+6. **Run analysis:**
 for now run the test code to not exeed 4o token rate limit
    ```bash
    python main.py  # Interactive mode - enter company tickers
@@ -84,10 +107,19 @@ company_names = ["AAPL", "GOOGL", "MSFT"]
 ```
 
 ## Troubleshooting
-
+- **MCP error**: If you encounter MCP connection issues, check the `google-search-mcp/index.ts` and `google-search-mcp/dist/index.js` files. Remove the outer parentheses from the capabilities object:
+  ```json
+  capabilities: {
+      tools: {},
+  }
+  ```
 - **API errors**: Check `.env` file and API keys
 - **Rate limits**: Wait between runs
 - **Import errors**: Ensure virtual environment is activated
+- **Virtual environment issues**: 
+  - Make sure to activate the virtual environment before running the application
+  - To deactivate: `deactivate`
+  - If you get permission errors, try: `python3 -m venv venv`
 
 ---
 
