@@ -110,7 +110,7 @@ async def serve_frontend():
 @app.get("/health")
 async def health_check():
     """Health check endpoint"""
-    return {"status": "healthy", "service": "Stock Analysis API"}
+    return {"status": "healthy"}
 
 if __name__ == "__main__":
     import os
