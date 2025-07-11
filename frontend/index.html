@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Analysis Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-6 py-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-4xl font-bold mb-2">
+                        <i class="fas fa-chart-line mr-3"></i>
+                        Stock Analysis Dashboard
+                    </h1>
+                    <p class="text-blue-100">AI-Powered Investment Analysis & Recommendations</p>
+                </div>
+                <div class="text-right">
+                    <div class="text-sm opacity-75">Powered by</div>
+                    <div class="font-semibold">OpenAI GPT-4o</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-8">
+        <!-- Input Section -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8 card-hover">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">
+                <i class="fas fa-search mr-2 text-blue-600"></i>
+                Company Analysis Request
+            </h2>
+            
+            <div class="mb-6">
+                <label for="companyInput" class="block text-sm font-medium text-gray-700 mb-2">
+                    Enter Company Ticker Symbols
+                </label>
+                <div class="flex gap-2">
+                    <input 
+                        type="text" 
+                        id="companyInput" 
+                        placeholder="e.g., AAPL, GOOG, MSFT, TSLA"
+                        class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    >
+                    <button 
+                        id="analyzeBtn"
+                        class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+                    >
+                        <i class="fas fa-play mr-2"></i>
+                        Analyze
+                    </button>
+                </div>
+                <p class="text-sm text-gray-500 mt-2">
+                    Separate multiple companies with commas. Leave empty to use default companies (AAPL, GOOG, ORCL).
+                </p>
+            </div>
+
+            <!-- Progress Section -->
+            <div id="progressSection" class="hidden">
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                    <div class="flex items-center mb-3">
+                        <div class="loading-spinner mr-3"></div>
+                        <h3 class="text-lg font-semibold text-blue-800">Analysis in Progress...</h3>
+                    </div>
+                    <div id="progressSteps" class="space-y-2">
+                        <div class="flex items-center text-sm">
+                            <i class="fas fa-circle text-gray-300 mr-2"></i>
+                            <span>Tier 1: Stock Analysis (Market Research, Financial Health, Risk Assessment)</span>
+                        </div>
+                        <div class="flex items-center text-sm">
+                            <i class="fas fa-circle text-gray-300 mr-2"></i>
+                            <span>Tier 2: Research Analysis (Investment Analysis, Risk Evaluation)</span>
+                        </div>
+                        <div class="flex items-center text-sm">
+                            <i class="fas fa-circle text-gray-300 mr-2"></i>
+                            <span>Tier 3: Investment Lead (Portfolio Strategy, Final Recommendation)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="resultsSection" class="hidden">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                <i class="fas fa-chart-bar mr-2 text-green-600"></i>
+                Analysis Results
+            </h2>
+
+            <!-- Tier 1: Stock Analysis -->
+            <div class="mb-8">
+                <h3 class="text-xl font-bold text-gray-700 mb-4 bg-blue-100 p-3 rounded-lg cursor-pointer" onclick="toggleSection('tier1')">
+                    <i class="fas fa-chart-line mr-2"></i>
+                    Tier 1: Stock Analysis
+                    <i class="fas fa-chevron-down ml-auto transition-transform duration-300" id="tier1-icon"></i>
+                </h3>
+                <div id="tier1-content" class="grid md:grid-cols-3 gap-6">
+                    <div id="marketResearch" class="bg-white rounded-lg shadow-md p-6 card-hover">
+                        <h4 class="text-lg font-semibold text-blue-600 mb-3 cursor-pointer" onclick="toggleCard('marketResearch')">
+                            <i class="fas fa-globe mr-2"></i>
+                            Market Research
+                            <i class="fas fa-chevron-down ml-auto transition-transform duration-300" id="marketResearch-icon"></i>
+                        </h4>
+                        <div id="marketResearch-content" class="text-gray-600 text-sm">
+                            <div class="loading-spinner mx-auto"></div>
+                            <p class="text-center mt-2">Loading...</p>
+                        </div>
+                    </div>
+                    
+                    <div id="financialHealth" class="bg-white rounded-lg shadow-md p-6 card-hover">
+                        <h4 class="text-lg font-semibold text-green-600 mb-3 cursor-pointer" onclick="toggleCard('financialHealth')">
+                            <i class="fas fa-heartbeat mr-2"></i>
+                            Financial Health
+                            <i class="fas fa-chevron-down ml-auto transition-transform duration-300" id="financialHealth-icon"></i>
+                        </h4>
+                        <div id="financialHealth-content" class="text-gray-600 text-sm">
+                            <div class="loading-spinner mx-auto"></div>
+                            <p class="text-center mt-2">Loading...</p>
+                        </div>
+                    </div>
+                    
+                    <div id="riskAssessment" class="bg-white rounded-lg shadow-md p-6 card-hover">
+                        <h4 class="text-lg font-semibold text-red-600 mb-3 cursor-pointer" onclick="toggleCard('riskAssessment')">
+                            <i class="fas fa-shield-alt mr-2"></i>
+                            Risk Assessment
+                            <i class="fas fa-chevron-down ml-auto transition-transform duration-300" id="riskAssessment-icon"></i>
+                        </h4>
+                        <div id="riskAssessment-content" class="text-gray-600 text-sm">
+                            <div class="loading-spinner mx-auto"></div>
+                            <p class="text-center mt-2">Loading...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tier 2: Research Analysis -->
+            <div class="mb-8">
+                <h3 class="text-xl font-bold text-gray-700 mb-4 bg-green-100 p-3 rounded-lg cursor-pointer" onclick="toggleSection('tier2')">
+                    <i class="fas fa-microscope mr-2"></i>
+                    Tier 2: Research Analysis
+                    <i class="fas fa-chevron-down ml-auto transition-transform duration-300" id="tier2-icon"></i>
+                </h3>
+                <div id="tier2-content" class="grid md:grid-cols-2 gap-6">
+                    <div id="investmentAnalysis" class="bg-white rounded-lg shadow-md p-6 card-hover">
+                        <h4 class="text-lg font-semibold text-purple-600 mb-3 cursor-pointer" onclick="toggleCard('investmentAnalysis')">
+                            <i class="fas fa-chart-pie mr-2"></i>
+                            Investment Analysis
+                            <i class="fas fa-chevron-down ml-auto transition-transform duration-300" id="investmentAnalysis-icon"></i>
+                        </h4>
+                        <div id="investmentAnalysis-content" class="text-gray-600 text-sm">
+                            <div class="loading-spinner mx-auto"></div>
+                            <p class="text-center mt-2">Loading...</p>
+                        </div>
+                    </div>
+                    
+                    <div id="riskEvaluation" class="bg-white rounded-lg shadow-md p-6 card-hover">
+                        <h4 class="text-lg font-semibold text-orange-600 mb-3 cursor-pointer" onclick="toggleCard('riskEvaluation')">
+                            <i class="fas fa-exclamation-triangle mr-2"></i>
+                            Risk Evaluation
+                            <i class="fas fa-chevron-down ml-auto transition-transform duration-300" id="riskEvaluation-icon"></i>
+                        </h4>
+                        <div id="riskEvaluation-content" class="text-gray-600 text-sm">
+                            <div class="loading-spinner mx-auto"></div>
+                            <p class="text-center mt-2">Loading...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tier 3: Investment Lead -->
+            <div class="mb-8">
+                <h3 class="text-xl font-bold text-gray-700 mb-4 bg-purple-100 p-3 rounded-lg cursor-pointer" onclick="toggleSection('tier3')">
+                    <i class="fas fa-crown mr-2"></i>
+                    Tier 3: Investment Lead
+                    <i class="fas fa-chevron-down ml-auto transition-transform duration-300" id="tier3-icon"></i>
+                </h3>
+                <div id="tier3-content" class="grid md:grid-cols-3 gap-6">
+                    <div id="portfolioStrategy" class="bg-white rounded-lg shadow-md p-6 card-hover">
+                        <h4 class="text-lg font-semibold text-indigo-600 mb-3 cursor-pointer" onclick="toggleCard('portfolioStrategy')">
+                            <i class="fas fa-chess mr-2"></i>
+                            Portfolio Strategy
+                            <i class="fas fa-chevron-down ml-auto transition-transform duration-300" id="portfolioStrategy-icon"></i>
+                        </h4>
+                        <div id="portfolioStrategy-content" class="text-gray-600 text-sm">
+                            <div class="loading-spinner mx-auto"></div>
+                            <p class="text-center mt-2">Loading...</p>
+                        </div>
+                    </div>
+                    
+                    <div id="investmentRationale" class="bg-white rounded-lg shadow-md p-6 card-hover">
+                        <h4 class="text-lg font-semibold text-teal-600 mb-3 cursor-pointer" onclick="toggleCard('investmentRationale')">
+                            <i class="fas fa-lightbulb mr-2"></i>
+                            Investment Rationale
+                            <i class="fas fa-chevron-down ml-auto transition-transform duration-300" id="investmentRationale-icon"></i>
+                        </h4>
+                        <div id="investmentRationale-content" class="text-gray-600 text-sm">
+                            <div class="loading-spinner mx-auto"></div>
+                            <p class="text-center mt-2">Loading...</p>
+                        </div>
+                    </div>
+                    
+                    <div id="finalRecommendation" class="bg-white rounded-lg shadow-md p-6 card-hover">
+                        <h4 class="text-lg font-semibold text-pink-600 mb-3 cursor-pointer" onclick="toggleCard('finalRecommendation')">
+                            <i class="fas fa-star mr-2"></i>
+                            Final Recommendation
+                            <i class="fas fa-chevron-down ml-auto transition-transform duration-300" id="finalRecommendation-icon"></i>
+                        </h4>
+                        <div id="finalRecommendation-content" class="text-gray-600 text-sm">
+                            <div class="loading-spinner mx-auto"></div>
+                            <p class="text-center mt-2">Loading...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error Section -->
+        <div id="errorSection" class="hidden bg-red-50 border border-red-200 rounded-lg p-6 mb-8">
+            <div class="flex items-center">
+                <i class="fas fa-exclamation-circle text-red-600 text-xl mr-3"></i>
+                <div>
+                    <h3 class="text-lg font-semibold text-red-800">Analysis Failed</h3>
+                    <p id="errorMessage" class="text-red-600 mt-1"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-16">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-300">
+                <i class="fas fa-code mr-2"></i>
+                Built with FastAPI, OpenAI GPT-4o, and modern web technologies
+            </p>
+        </div>
+    </footer>
+
+    <script src="/static/script.js"></script>
+</body>
+</html> 
