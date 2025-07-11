@@ -59,7 +59,7 @@ const server = new Server(
     capabilities: {
       tools: {},
     },
-  },
+  }
 );
 
 // Handle tool listing

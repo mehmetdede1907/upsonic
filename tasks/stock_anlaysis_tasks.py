@@ -5,7 +5,6 @@ from pydantic import BaseModel
 from typing import List, Optional
 import os
 from agents.stock_anlayzer import stock_analyst_agent
-from config import COMPANY_NAMES
 
 class GoogleSearchMCP:
     command = "node"
@@ -25,13 +24,6 @@ class CompanyMarketPosition(BaseModel):
 class MarketPosition(BaseModel):
     companies: List[CompanyMarketPosition]
 
-market_research = Task(
-    f"Analyze each given company's market position, key performance metrics, and competitive landscape. Companies: {', '.join(COMPANY_NAMES)}",
-    tools=[GoogleSearchMCP],
-    response_format=MarketPosition,
-    agent=stock_analyst_agent,
-)
-
 class CompanyFinancialHealth(BaseModel):
     company: str
     financial_ratios: List[str]
@@ -41,13 +33,6 @@ class CompanyFinancialHealth(BaseModel):
 
 class FinancialHealth(BaseModel):
     companies: List[CompanyFinancialHealth]
-
-financial_health = Task(
-    f"Evaluate each company's financial health, including key ratios, analyst ratings, and growth catalysts. Companies: {', '.join(COMPANY_NAMES)}",
-    tools=[GoogleSearchMCP],
-    response_format=FinancialHealth,
-    agent=stock_analyst_agent,
-)
 
 class CompanyInvestmentRisk(BaseModel):
     company: str
@@ -60,8 +45,53 @@ class CompanyInvestmentRisk(BaseModel):
 class InvestmentRisk(BaseModel):
     companies: List[CompanyInvestmentRisk]
 
+from config import COMPANY_NAMES
+
+def create_stock_analysis_tasks(company_names: List[str]):
+    companies_str = ", ".join(company_names)
+
+    market_research = Task(
+        f"Analyze each given company's market position, key performance metrics, and competitive landscape. Companies: {companies_str}",
+        tools=[GoogleSearchMCP],
+        response_format=MarketPosition,
+        agent=stock_analyst_agent,
+    )
+
+    financial_health_task = Task(
+        f"Evaluate each company's financial health, including key ratios, analyst ratings, and growth catalysts. Companies: {companies_str}",
+        tools=[GoogleSearchMCP],
+        response_format=FinancialHealth,
+        agent=stock_analyst_agent,
+    )
+
+    risk_assessment_task = Task(
+        f"Identify and summarize significant investment risks for each company. Companies: {companies_str}",
+        tools=[GoogleSearchMCP],
+        response_format=InvestmentRisk,
+        agent=stock_analyst_agent
+    )
+    
+    return market_research, financial_health_task, risk_assessment_task
+
+# Create default tasks at module level
+companies_str = ", ".join(COMPANY_NAMES)
+
+market_research = Task(
+    f"Analyze each given company's market position, key performance metrics, and competitive landscape. Companies: {companies_str}",
+    tools=[GoogleSearchMCP],
+    response_format=MarketPosition,
+    agent=stock_analyst_agent,
+)
+
+financial_health = Task(
+    f"Evaluate each company's financial health, including key ratios, analyst ratings, and growth catalysts. Companies: {companies_str}",
+    tools=[GoogleSearchMCP],
+    response_format=FinancialHealth,
+    agent=stock_analyst_agent,
+)
+
 risk_assessment = Task(
-    f"Identify and summarize significant investment risks for each company. Companies: {', '.join(COMPANY_NAMES)}",
+    f"Identify and summarize significant investment risks for each company. Companies: {companies_str}",
     tools=[GoogleSearchMCP],
     response_format=InvestmentRisk,
     agent=stock_analyst_agent

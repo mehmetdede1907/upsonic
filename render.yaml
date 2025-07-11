@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: stock-analysis-app
+    runtime: docker
+    plan: free
+    buildCommand: docker build -t stock-analysis-app .
+    startCommand: docker run -p $PORT:8000 stock-analysis-app
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: GOOGLE_API_KEY
+        sync: false
+      - key: GOOGLE_CSE_ID
+        sync: false
+    healthCheckPath: /health 
