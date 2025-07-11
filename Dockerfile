@@ -27,4 +27,4 @@ RUN cd google-search-mcp && \
 RUN mkdir -p frontend && chmod 755 frontend
 
 # Command to run the FastAPI application
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["python", "main.py"]
